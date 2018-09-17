@@ -55,43 +55,19 @@ export default class New extends Component{
             CdiDDD2:12,
             CdsNumero2:'3101-1571',
          };
-       
-         if (formData.formName.length < 1 ||
-            formData.formEmail.length < 1 ||
-            formData.formAddress.length < 1 ||
-            formData.formNeighborhood.length < 1 ||
-            formData.formCity.length < 1 ||
-            formData.formZipCode.length < 1 ||
-            formData.formState.length < 1 ||
-            formData.formCpf.length < 1){
-          return false;
-         }
-
+         console.log(JSON.stringify(formData));
          Axios.post('http://dev.wafx.global/abccrm/api/api/transferencia/GravarNovoSocio', { formData }, {headers: {
           'Authorization' : 'Basic 0c07bc17-4d4a-4a08-bb3e-6804524c7f07',
           'Content-Type':'application/json'
           }
         })
          .then(res => {
-           console.log(res);
-           console.log(res.data);
-         });
-
-         this.setState({
-            name: '',
-            cpf: '',
-            email:'',
-            address:'',
-            addOn:'',
-            neighborhood:'',
-            city:'',
-            state:'',
-            zipcode:''
+          alert('Comprador cadastrado');
          });
        }
     render(){
         return(
-          <div className='react-form' onSubmit={this.handleSubmit}>
+          <form className='react-form' onSubmit={this.handleSubmit}>
           <h1>Cadastro de Comprador Pessoa Fisica</h1>
       
           <fieldset className='form-group'>
@@ -108,6 +84,12 @@ export default class New extends Component{
       
               <input id='formEmail' className='form-input' name='email' type='email' require onChange={this.handleChange} value={this.state.email} />
           </fieldset>
+
+        <fieldset className='form-group'>
+          <ReactFormLabel htmlFor='formZipCode' title='Cep:' />
+  
+          <input id='formZipCode' className='form-input' name='zipcode' type='text' require onChange={this.handleChange} value={this.state.zipcode} />
+        </fieldset>
       
           <fieldset className='form-group'>
               <ReactFormLabel htmlFor='formAddress' title='Endereço:' />
@@ -137,16 +119,11 @@ export default class New extends Component{
       
               <input id='formState' className='form-input' name='state' type='text' require onChange={this.handleChange} value={this.state.state} />
           </fieldset>
-      
-          <fieldset className='form-group'>
-              <ReactFormLabel htmlFor='formZipCode' title='Cep:' />
-      
-              <input id='formZipCode' className='form-input' name='zipcode' type='text' require onChange={this.handleChange} value={this.state.zipcode} />
-          </fieldset>
+
           <div className='form-group'>
               <input id='formButton' className='btn' type='submit' placeholder='Enviar Cadastro' value='Enviar Cadastro' />
           </div>
-      </div>
+      </form>
       );
     }
 }
