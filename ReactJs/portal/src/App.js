@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Transfer from './components/transfer/Transfer';
 /*import SearchTransfer from './components/transfer/SearchTransfer';*/
-let IdiSocioProprietario = "";
-let Token = "";
 class App extends Component {
   render() {
     return (

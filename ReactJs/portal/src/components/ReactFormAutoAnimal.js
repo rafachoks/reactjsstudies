@@ -98,7 +98,7 @@ export default class AnimalAutoComplete extends Component {
   };
 
   render() {
-    IdiSocioProprietario = this.props.idSocio;
+    IdiSocioProprietario = this.props.idiSocio;
     Token = this.props.token;
     const { value, suggestions } = this.state;
     const inputProps = {

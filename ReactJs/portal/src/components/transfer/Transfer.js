@@ -92,12 +92,12 @@ export default class Transfer extends Component {
     const formData = {
       IdiAnimal: this.state.IdiAnimal,
       IdiSocioVendedor: this.state.IdiSocio,
-      IdiSocioComprador: this.state.IdiSocioVendedor,
+      IdiSocioComprador: this.state.IdiSocioComprador,
       DtdTransferencia: this.state.data,
       Flg2ViaCertificado: this.state.radioOne
     };
     Axios.post(
-      "http://localhost:51798/api/socio/Autenticar",
+      "http://localhost:51798/api/transferencia/GravarTransferencia",
       JSON.stringify(formData),
       {
         headers: {

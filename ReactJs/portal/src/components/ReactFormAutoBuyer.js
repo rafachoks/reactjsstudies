@@ -4,6 +4,7 @@ import Autosuggest from "react-autosuggest";
 import Label from "./../components/ReactFormLabel";
 
 let CdsPadraoNomeCPFCNPJ = "";
+let Token = "";
 let resultApi = [
   {
     IdiSocio: "",
@@ -12,7 +13,7 @@ let resultApi = [
     CdsCPFCNPJ: ""
   }
 ];
-let Token = "";
+let IdVendor = '';
 
 function escapeRegexCharacters(str) {
   return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -31,7 +32,8 @@ function getSuggestions(value) {
 }
 
 function getSuggestionValue(suggestion) {
-  return `${suggestion.NmsCompleto} ${suggestion.CdsPadrao}`;
+  IdVendor = suggestion.IdiSocio;
+  return `${suggestion.NmsCompleto}`;
 }
 
 function renderSuggestion(suggestion) {
@@ -58,11 +60,12 @@ function callBuyerSearch() {
 
 export default class BuyerAutoComplete extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      IdiSocioProprietario: "",
+      IdiSocioProprietario: '',
+      IdiSocioComprador:'',
       resultList: [],
-      value: "",
+      value: '',
       suggestions: [],
     };
 
@@ -73,13 +76,15 @@ export default class BuyerAutoComplete extends Component {
     callBuyerSearch();
   }
 
+  OnstoreVendorId = this.OnstoreVendorId.bind(this);
 
   handleSubmit = (event, message) => {
     event.preventDefault();
   };
   onChange = (event, { newValue, method }) => {
     this.setState({
-      value: newValue
+      value: newValue,
+      IdiSocioComprador: IdVendor
     });
   };
 
@@ -94,6 +99,12 @@ export default class BuyerAutoComplete extends Component {
       suggestions: []
     });
   };
+
+  OnstoreVendorId(){
+       this.setState({
+         IdiSocioComprador: IdVendor
+       });
+     }
 
   render() {
     Token = this.props.token;
@@ -118,6 +129,7 @@ export default class BuyerAutoComplete extends Component {
             getSuggestionValue={getSuggestionValue}
             renderSuggestion={renderSuggestion}
             inputProps={inputProps}
+            updatedVendor={this.state.IdiSocioComprador}
           />
         </fieldset>
       </div>
